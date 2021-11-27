@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class SeleniumTest {
 
     private WebDriver driver;
@@ -36,16 +37,17 @@ public class SeleniumTest {
         driver.quit();
         driver = null;
     }
+
     @Test
-    void shouldSendRequestToTheCardTest(){
+    void shouldSendRequestToTheCardTest() {
         driver.get("http://localhost:9999");
 
-        driver.findElement(By.cssSelector("[data-test-id=name]")).sendKeys("Ярослав Гуляев");
-        driver.findElement(By.cssSelector("[data-test-id=phone]")).sendKeys("+79265432111");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Ярослав Гуляев");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79265432111");
         driver.findElement(By.className("checkbox__box")).click();
         driver.findElement(By.cssSelector("button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
-        assertEquals("Наш менеджер свяжется с вами в ближайшее время.",text.trim());
+        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
 
     }
 
